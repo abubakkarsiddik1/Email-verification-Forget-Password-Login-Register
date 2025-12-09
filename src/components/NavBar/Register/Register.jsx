@@ -1,4 +1,8 @@
-import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile} from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+} from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../../firebase/firebase.init";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -52,8 +56,8 @@ const Register = () => {
     setError("");
     setSuccess(false);
 
-    if(!terms){
-      setError('please accept our terms and conditions');
+    if (!terms) {
+      setError("please accept our terms and conditions");
       return;
     }
 
@@ -63,23 +67,19 @@ const Register = () => {
         setSuccess(true);
         event.target.reset();
 
-
         //  update user profile
         const profile = {
           displayName: name,
-          photoURL: photo
-        }
+          photoURL: photo,
+        };
         updateProfile(result.user, profile)
-        .then(() => {
-
-        })
-        .catch()
+          .then(() => {})
+          .catch();
 
         //  sent verification email
-        sendEmailVerification(result.user)
-            .then(() => {
-              alert('please login to your email and cerify your email address')
-            })
+        sendEmailVerification(result.user).then(() => {
+          alert("please login to your email and cerify your email address");
+        });
       })
 
       .catch((error) => {
@@ -110,7 +110,7 @@ const Register = () => {
                   className="input"
                   placeholder="Your Name"
                 />
-                   {/* User Photo Url */}
+                {/* User Photo Url */}
                 <label className="label">Photo Url</label>
                 <input
                   type="text"
@@ -118,7 +118,7 @@ const Register = () => {
                   className="input"
                   placeholder="photo url"
                 />
-                  {/* Email */}
+                {/* Email */}
                 <label className="label">Email</label>
                 <input
                   type="email"
@@ -142,10 +142,7 @@ const Register = () => {
                   </button>
                 </div>
                 <label class="label">
-                  <input 
-                  type="checkbox" 
-                  name="terms"
-                  className="checkbox" />
+                  <input type="checkbox" name="terms" className="checkbox" />
                   Accept our terms and Condition
                 </label>
                 <button className="btn btn-neutral mt-4">Register</button>
@@ -155,7 +152,12 @@ const Register = () => {
               )}
               {error && <p className="text-red-500">{error}</p>}
             </form>
-            <p>Already have an account? Please <Link className="text-blue-400 underline" to="/login" >Login</Link> </p>
+            <p>
+              Already have an account? Please{" "}
+              <Link className="text-blue-400 underline" to="/login">
+                Login
+              </Link>{" "}
+            </p>
           </div>
         </div>
       </div>
